@@ -420,16 +420,16 @@ lora_init(void)
       .max_transfer_sz = 0
    };
            
-   ret = spi_bus_initialize(VSPI_HOST, &bus, 0);
+   ret = spi_bus_initialize(VSPI_HOST, &bus, 1);
    assert(ret == ESP_OK);*/
 
    spi_device_interface_config_t dev = {
-      .clock_speed_hz = CONFIG_EXAMPLE_ETH_SPI_CLOCK_MHZ * 1000 * 1000, //20MHZ de clock
+      .clock_speed_hz = 20 * 1000 * 1000, //20MHZ de clock
       .mode = 0,
       .spics_io_num = CONFIG_CS_GPIO,
-      .queue_size = 2,
-      .flags = 0,
-      .pre_cb = NULL
+      .queue_size = 20,
+      //.flags = 0,
+      //.pre_cb = NULL
    };
    ret = spi_bus_add_device(SPI2_HOST, &dev, &__spi);
    assert(ret == ESP_OK);
